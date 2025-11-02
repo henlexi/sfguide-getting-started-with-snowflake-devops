@@ -9,18 +9,23 @@ CREATE OR ALTER WAREHOUSE QUICKSTART_WH
 -- Separate database for git repository
 CREATE OR ALTER DATABASE QUICKSTART_COMMON;
 
-
 -- API integration is needed for GitHub integration
 CREATE OR REPLACE API INTEGRATION git_api_integration
   API_PROVIDER = git_https_api
-  API_ALLOWED_PREFIXES = ('https://github.com/<insert GitHub username>') -- INSERT YOUR GITHUB USERNAME HERE
+  API_ALLOWED_PREFIXES = ('$PREFIX')
+
   ENABLED = TRUE;
 
+ SHOW INTEGRATIONS;
 
+ --SHOW API INTEGRATION;
+
+ DESCRIBE API INTEGRATION git_api_integration;
+ 
 -- Git repository object is similar to external stage
 CREATE OR REPLACE GIT REPOSITORY quickstart_common.public.quickstart_repo
   API_INTEGRATION = git_api_integration
-  ORIGIN = '<insert URL of forked GitHub repo>'; -- INSERT URL OF FORKED REPO HERE
+  ORIGIN = '$REPO'
 
 
 CREATE OR ALTER DATABASE QUICKSTART_PROD;
@@ -44,4 +49,10 @@ CREATE OR ALTER STAGE bronze.raw;
 
 
 -- Copy file from GitHub to internal stage
-copy files into @bronze.raw from @quickstart_common.public.quickstart_repo/branches/main/data/airport_list.json;
+
+COPY files INTO @bronze.raw FROM @quickstart_common.public.quickstart_repo/branches/main/data/airport_list.json;
+LIST @bronze.raw;
+
+LIST @quickstart_common.public.quickstart_repo/branches/main;
+
+ALTER GIT REPOSITORY quickstart_common.public.quickstart_repo FETCH;
