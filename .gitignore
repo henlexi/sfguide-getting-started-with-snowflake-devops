@@ -1,1 +1,3 @@
 .snowflake/logs
+.env
+snowenv/
