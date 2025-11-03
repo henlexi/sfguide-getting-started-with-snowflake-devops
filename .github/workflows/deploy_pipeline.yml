@@ -59,7 +59,4 @@ jobs:
           snow git execute \
             "@${REPO_NAME}/branches/${BRANCH_NAME}/steps/0[134]_*" \
             -D "environment='${BRANCH_NAME}'" \
-            -D "retention_time=${RETENTION_TIME}" \
-            -D "email='${EMAIL}'" \ 
-            -D "prefix='${PREFIX}'" \ 
-            -D "repo='${REPO}'"
+            -D "retention_time=${RETENTION_TIME}"

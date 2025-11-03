@@ -12,7 +12,7 @@ CREATE OR ALTER DATABASE QUICKSTART_COMMON;
 -- API integration is needed for GitHub integration
 CREATE OR REPLACE API INTEGRATION git_api_integration
   API_PROVIDER = git_https_api
-  API_ALLOWED_PREFIXES = ({{prefix}})
+  API_ALLOWED_PREFIXES = ('https://github.com/henlexi')
   ENABLED = TRUE;
 
  SHOW INTEGRATIONS;
@@ -24,7 +24,7 @@ CREATE OR REPLACE API INTEGRATION git_api_integration
 -- Git repository object is similar to external stage
 CREATE OR REPLACE GIT REPOSITORY quickstart_common.public.quickstart_repo
   API_INTEGRATION = git_api_integration
-  ORIGIN = '{{repo}}';
+  ORIGIN = 'https://github.com/henlexi/sfguide-getting-started-with-snowflake-devops.git';
 
 CREATE OR ALTER DATABASE QUICKSTART_{{environment}};
 
