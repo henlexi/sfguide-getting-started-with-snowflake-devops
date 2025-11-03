@@ -21,6 +21,7 @@ jobs:
       # Read connection secrets
       SNOWFLAKE_CONNECTIONS_DEFAULT_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
       SNOWFLAKE_CONNECTIONS_DEFAULT_USER: ${{ secrets.SNOWFLAKE_USER }}
+      PRIVATE_KEY_PASSPHRASE: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_PASSPHRASE }}
       EMAIL: ${{ secrets.EMAIL }}
       PREFIX: ${{ secrets.PREFIX }}
       REPO: ${{ secrets.REPO }}
